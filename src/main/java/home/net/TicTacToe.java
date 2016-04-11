@@ -26,7 +26,7 @@ public class TicTacToe {
     }
 
     public boolean move(int row, int column) {
-        boolean moveAllowed = gameBoard[row - 1][column - 1].equals("");
+        boolean moveAllowed = "".equals(gameBoard[row - 1][column - 1]);
         if (moveAllowed) {
             gameBoard[row - 1][column - 1] = nextTurn;
             checkWinningMove(row, column);
