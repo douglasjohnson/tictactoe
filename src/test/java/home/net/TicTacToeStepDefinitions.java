@@ -1,6 +1,7 @@
 package home.net;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class TicTacToeStepDefinitions {
 
     @When("^crosses set to play first$")
     public void crossesPlaysFirst() {
-        ticTacToe.firstTurn("X");
+        assertThat(ticTacToe.firstTurn("X"), is(true));
     }
 
     @When("^a move is made in row \"([^\"]*)\" column \"([^\"]*)\"$")
@@ -73,5 +74,20 @@ public class TicTacToeStepDefinitions {
     @Then("^crosses wins$")
     public void crossesWins() {
         assertThat(ticTacToe.winner(), is("X"));
+    }
+
+    @Then("^game is drawn$")
+    public void gameDrawn() {
+        assertThat(ticTacToe.winner(), is(nullValue()));
+    }
+
+    @Then("^no more moves$")
+    public void noMoves() {
+        assertThat(ticTacToe.turn(), is(nullValue()));
+    }
+
+    @Then("^noughts set to play first is not allowed$")
+    public void noughtsPlaysFirstNotAllowed() {
+        assertThat(ticTacToe.firstTurn("O"), is(false));
     }
 }

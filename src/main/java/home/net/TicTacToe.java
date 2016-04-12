@@ -2,6 +2,7 @@ package home.net;
 
 public class TicTacToe {
 
+    private static final String EMPTY_SPACE = "";
     private static final String NOUGHTS = "O";
     private static final String CROSSES = "X";
 
@@ -10,7 +11,8 @@ public class TicTacToe {
     private String winner = null;
 
     public TicTacToe() {
-        gameBoard = new String[][] { { "", "", "" }, { "", "", "" }, { "", "", "" } };
+        gameBoard = new String[][] { { EMPTY_SPACE, EMPTY_SPACE, EMPTY_SPACE },
+                { EMPTY_SPACE, EMPTY_SPACE, EMPTY_SPACE }, { EMPTY_SPACE, EMPTY_SPACE, EMPTY_SPACE } };
     }
 
     public String[][] gameBoard() {
@@ -21,18 +23,59 @@ public class TicTacToe {
         return nextTurn;
     }
 
-    public void firstTurn(String turn) {
-        nextTurn = turn;
+    public boolean firstTurn(String turn) {
+        boolean firstTurnUpdated = false;
+        if (noMovesPlayed()) {
+            nextTurn = turn;
+            firstTurnUpdated = true;
+        }
+        return firstTurnUpdated;
+    }
+
+    private boolean noMovesPlayed() {
+        boolean noMovePlayed = true;
+        for (int row = 0; row < gameBoard.length; row++) {
+            String[] gameBoardRow = gameBoard[row];
+            for (int column = 0; column < gameBoardRow.length; column++) {
+                noMovePlayed &= EMPTY_SPACE.equals(gameBoardRow[column]);
+            }
+        }
+        return noMovePlayed;
     }
 
     public boolean move(int row, int column) {
-        boolean moveAllowed = "".equals(gameBoard[row - 1][column - 1]);
+        boolean moveAllowed = validMove(row, column);
         if (moveAllowed) {
             gameBoard[row - 1][column - 1] = nextTurn;
             checkWinningMove(row, column);
-            nextTurn = NOUGHTS.equals(nextTurn) ? CROSSES : NOUGHTS;
+            if (winner == null && movesRemaining()) {
+                nextTurn = NOUGHTS.equals(nextTurn) ? CROSSES : NOUGHTS;
+            } else {
+                nextTurn = null;
+            }
         }
         return moveAllowed;
+    }
+
+    private boolean validMove(int row, int column) {
+        boolean validMove = false;
+        boolean validRow = 1 <= row && row <= gameBoard.length;
+        if (validRow) {
+            boolean validColumn = 1 <= column && column <= gameBoard[row - 1].length;
+            validMove = validColumn && EMPTY_SPACE.equals(gameBoard[row - 1][column - 1]);
+        }
+        return validMove;
+    }
+
+    private boolean movesRemaining() {
+        boolean emptySpaces = false;
+        for (int row = 0; row < gameBoard.length; row++) {
+            String[] gameBoardRow = gameBoard[row];
+            for (int column = 0; column < gameBoardRow.length; column++) {
+                emptySpaces |= EMPTY_SPACE.equals(gameBoardRow[column]);
+            }
+        }
+        return emptySpaces;
     }
 
     private void checkWinningMove(int row, int column) {
