@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>TicTacToe</title>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+<script type="text/javascript" data-main="js/main" src="js/lib/require-2.2.0.min.js"></script>
 </head>
-<body data-ng-app>
-    <div data-ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" class="tictactoe-gameboard-cell"></div>
+<body data-ng-controller="tictactoeController">
+    <div data-ng-repeat="cell in tictactoe.cells track by $index" class="tictactoe-gameboard-cell"></div>
 </body>
 </html>
