@@ -51,8 +51,8 @@ public class TicTacToeApplicationStepDefinitions {
         ngWebDriver.waitForAngularRequestsToFinish();
     }
 
-    @When("^crosses set to play first$")
-    public void crossesPlaysFirst() {
+    @When("^switch play first$")
+    public void switchPlayFirst() {
         WebElement gameBoardFirstTurnElement = webDriver.findElement(By.id("tictactoe-first-turn"));
         gameBoardFirstTurnElement.click();
     }

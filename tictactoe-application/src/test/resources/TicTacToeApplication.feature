@@ -10,8 +10,14 @@ Feature: TicTacToe application
 
   Scenario: First move can be set to crosses
     Given a new game of tic tac toe is started
-     When crosses set to play first
+     When switch play first
      Then crosses turn
+
+  Scenario: First move can be set to crosses and back to noughts again
+    Given a new game of tic tac toe is started
+      And switch play first
+     When switch play first
+     Then noughts turn
 
   Scenario: Play first move
     Given a new game of tic tac toe is started
