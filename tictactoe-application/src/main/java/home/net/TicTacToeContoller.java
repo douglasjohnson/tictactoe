@@ -14,7 +14,14 @@ public class TicTacToeContoller {
 
     @RequestMapping(value = "/tictactoe", method = RequestMethod.GET)
     @ResponseBody
-    public TicTacToeGame newGame() {
+    public TicTacToeGame tictactoe() {
+        return tictactoeGame;
+    }
+
+    @RequestMapping(value = "/switchFirstTurn", method = RequestMethod.GET)
+    @ResponseBody
+    public TicTacToeGame switchFirstTurn() {
+        tictactoeGame.switchFirstTurn();
         return tictactoeGame;
     }
 

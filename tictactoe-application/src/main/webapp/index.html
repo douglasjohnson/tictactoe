@@ -4,9 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>TicTacToe</title>
 <script type="text/javascript" data-main="js/main" src="js/lib/require-2.2.0.min.js"></script>
+<style>
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+.tictactoe-gameboard-cell {
+    border-style: solid;
+    border-width: 1px;
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+}
+</style>
 </head>
 <body data-ng-controller="tictactoeController">
-    <div data-ng-repeat="cell in tictactoe.cells track by $index" class="tictactoe-gameboard-cell"></div>
-    <div id="tictactoe-turn">Noughts</div>
+    <div data-ng-cloak data-ng-show="tictactoe.state">
+        <div data-ng-repeat="row in tictactoe.state.gameboard track by $index" class="tictactoe-gameboard-row">
+            <div data-ng-repeat="column in row track by $index" class="tictactoe-gameboard-cell"></div>
+        </div>
+        <div id="tictactoe-turn">{{tictactoe.state.turn}}</div>
+        <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" value="Switch first turn"/>
+    </div>
 </body>
 </html>

@@ -8,7 +8,7 @@ Feature: TicTacToe application
     When a new game of tic tac toe is started
     Then noughts turn
 
-#  Scenario: First move can be set to crosses
-#    Given a new game of tic tac toe is started
-#     When crosses set to play first
-#     Then crosses turn
+  Scenario: First move can be set to crosses
+    Given a new game of tic tac toe is started
+     When crosses set to play first
+     Then crosses turn

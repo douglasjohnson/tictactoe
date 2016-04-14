@@ -16,7 +16,11 @@ public class TicTacToeGame {
     }
 
     public String getTurn() {
-        return tictactoe.turn();
+        return tictactoe.turn() == "O" ? "Noughts" : "Crosses";
+    }
+
+    public void switchFirstTurn() {
+        tictactoe.firstTurn(tictactoe.turn() == "O" ? "X" : "O");
     }
 
 }

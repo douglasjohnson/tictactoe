@@ -9,18 +9,13 @@ define([ 'angular' ], function (angular) {
         .factory('TicTacToe', function ($http) {
             return function () {
                 var tictactoe = this;
-                tictactoe.cells = [];
-                $http.get('tictactoe').success(function (tictactoeGame, status) {
-                    var row,
-                        gameboardRow,
-                        column;
-                    for (row = 0; row < tictactoeGame.gameboard.length; row++) {
-                        gameboardRow = tictactoeGame.gameboard[row];
-                        for (column = 0; column < gameboardRow.length; column++) {
-                            tictactoe.cells.push(gameboardRow[column]);
-                        }
-                    }
-                });
+                tictactoe.handleStateResponse = function (state) {
+                    tictactoe.state = state;
+                };
+                tictactoe.switchFirstTurn = function () {
+                    $http.get('switchFirstTurn').success(tictactoe.handleStateResponse);
+                };
+                $http.get('tictactoe').success(tictactoe.handleStateResponse);
             };
         });
 });
