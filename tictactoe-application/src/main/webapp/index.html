@@ -8,21 +8,26 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+.tictactoe-gameboard {
+    width: 305px;
+}
 .tictactoe-gameboard-cell {
     border-style: solid;
     border-width: 1px;
     height: 100px;
     width: 100px;
-    display: inline-block;
+    float: left;
 }
 </style>
 </head>
 <body data-ng-controller="tictactoeController">
     <div data-ng-cloak data-ng-show="tictactoe.state">
-        <div data-ng-repeat="row in tictactoe.state.gameboard track by $index" class="tictactoe-gameboard-row">
-            <div data-ng-repeat="column in row track by $index" class="tictactoe-gameboard-cell"></div>
+        <div class="tictactoe-gameboard">
+            <div id="tictactoe-gameboard-row{{rowIndex}}" data-ng-repeat="row in tictactoe.state.gameboard track by $index" data-ng-init="rowIndex = $index + 1" class="tictactoe-gameboard-row">
+                <div id="tictactoe-gameboard-column{{columnIndex}}" data-ng-repeat="column in row track by $index" data-ng-init="columnIndex = $index + 1" data-ng-click="tictactoe.makeMove(rowIndex, columnIndex)" class="tictactoe-gameboard-cell"><span>{{column}}</span></div>
+            </div>
         </div>
-        <div id="tictactoe-turn">{{tictactoe.state.turn}}</div>
+        <div id="tictactoe-turn"><span>{{tictactoe.state.turn}}</span></div>
         <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" value="Switch first turn"/>
     </div>
 </body>

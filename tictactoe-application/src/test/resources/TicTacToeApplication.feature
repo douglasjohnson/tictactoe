@@ -12,3 +12,12 @@ Feature: TicTacToe application
     Given a new game of tic tac toe is started
      When crosses set to play first
      Then crosses turn
+
+  Scenario: Play first move
+    Given a new game of tic tac toe is started
+     When a move is made in row "1" column "1"
+     Then the game board is:
+      | O |  |  |
+      |   |  |  |
+      |   |  |  |
+      And crosses turn

@@ -55,12 +55,32 @@ public class TicTacToeApplicationStepDefinitions {
         gameBoardFirstTurnElement.click();
     }
 
+    @When("^a move is made in row \"([^\"]*)\" column \"([^\"]*)\"$")
+    public void makeMove(int row, int column) {
+        WebElement gameBoardRowElement = webDriver.findElement(By.id("tictactoe-gameboard-row" + row));
+        WebElement gameBoardCellElement = gameBoardRowElement.findElement(By.id("tictactoe-gameboard-column" + column));
+        gameBoardCellElement.click();
+    }
+
     @Then("^the game board is empty$")
     public void gameBoardEmpty() {
         List<WebElement> gameBoardCellElements = webDriver.findElements(By.className("tictactoe-gameboard-cell"));
         assertThat("Game board should have 9 cells", gameBoardCellElements.size(), is(9));
         for (WebElement gameBoardCellElement : gameBoardCellElements) {
             assertThat(gameBoardCellElement.getText(), isEmptyString());
+        }
+    }
+
+    @Then("^the game board is:$")
+    public void gameBoard(List<List<String>> expectedGameBoard) {
+        for (int i = 0; i < expectedGameBoard.size(); i++) {
+            List<String> row = expectedGameBoard.get(i);
+            for (int j = 0; j < row.size(); j++) {
+                String cell = row.get(j);
+                WebElement gameBoardRowElement = webDriver.findElement(By.id("tictactoe-gameboard-row" + (i + 1)));
+                WebElement gameBoardCellElement = gameBoardRowElement.findElement(By.id("tictactoe-gameboard-column" + (j + 1)));
+                assertThat(gameBoardCellElement.getText(), is(cell));
+            }
         }
     }
 

@@ -1,8 +1,10 @@
 package home.net;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("session")
 public class TicTacToeGame {
 
     private TicTacToe tictactoe;
@@ -21,6 +23,10 @@ public class TicTacToeGame {
 
     public void switchFirstTurn() {
         tictactoe.firstTurn(tictactoe.turn() == "O" ? "X" : "O");
+    }
+
+    public void move(int row, int column) {
+        tictactoe.move(row, column);
     }
 
 }
