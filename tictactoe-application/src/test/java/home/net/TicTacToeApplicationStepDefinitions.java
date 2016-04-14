@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +15,8 @@ import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.paulhammant.ngwebdriver.NgWebDriver;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -27,7 +28,7 @@ import cucumber.api.java.en.When;
 @WebIntegrationTest
 public class TicTacToeApplicationStepDefinitions {
 
-    private WebDriver webDriver;
+    private PhantomJSDriver webDriver;
     @Value("${local.server.port}")
     private int port;
 
@@ -44,6 +45,14 @@ public class TicTacToeApplicationStepDefinitions {
     @When("^a new game of tic tac toe is started$")
     public void startNewGame() {
         webDriver.get("http://localhost:" + port + "/TicTacToe");
+        NgWebDriver ngWebDriver = new NgWebDriver(webDriver);
+        ngWebDriver.waitForAngularRequestsToFinish();
+    }
+
+    @When("^crosses set to play first$")
+    public void crossesPlaysFirst() {
+        WebElement gameBoardFirstTurnElement = webDriver.findElement(By.id("tictactoe-first-turn"));
+        gameBoardFirstTurnElement.click();
     }
 
     @Then("^the game board is empty$")
@@ -54,4 +63,17 @@ public class TicTacToeApplicationStepDefinitions {
             assertThat(gameBoardCellElement.getText(), isEmptyString());
         }
     }
+
+    @Then("^noughts turn$")
+    public void noughtsTurn() {
+        WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-turn"));
+        assertThat(gameBoardTurnElement.getText(), is("Noughts"));
+    }
+
+    @Then("^crosses turn$")
+    public void crossedTurn() {
+        WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-turn"));
+        assertThat(gameBoardTurnElement.getText(), is("Crosses"));
+    }
+
 }
