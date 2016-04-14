@@ -29,12 +29,15 @@ import cucumber.api.java.en.When;
 public class TicTacToeApplicationStepDefinitions {
 
     private PhantomJSDriver webDriver;
+    private NgWebDriver ngWebDriver;
+
     @Value("${local.server.port}")
     private int port;
 
     @Before
     public void setUp() {
         webDriver = new PhantomJSDriver();
+        ngWebDriver = new NgWebDriver(webDriver);
     }
 
     @After
@@ -45,7 +48,6 @@ public class TicTacToeApplicationStepDefinitions {
     @When("^a new game of tic tac toe is started$")
     public void startNewGame() {
         webDriver.get("http://localhost:" + port + "/TicTacToe");
-        NgWebDriver ngWebDriver = new NgWebDriver(webDriver);
         ngWebDriver.waitForAngularRequestsToFinish();
     }
 
@@ -64,6 +66,7 @@ public class TicTacToeApplicationStepDefinitions {
 
     @Then("^the game board is empty$")
     public void gameBoardEmpty() {
+        ngWebDriver.waitForAngularRequestsToFinish();
         List<WebElement> gameBoardCellElements = webDriver.findElements(By.className("tictactoe-gameboard-cell"));
         assertThat("Game board should have 9 cells", gameBoardCellElements.size(), is(9));
         for (WebElement gameBoardCellElement : gameBoardCellElements) {
@@ -73,6 +76,7 @@ public class TicTacToeApplicationStepDefinitions {
 
     @Then("^the game board is:$")
     public void gameBoard(List<List<String>> expectedGameBoard) {
+        ngWebDriver.waitForAngularRequestsToFinish();
         for (int i = 0; i < expectedGameBoard.size(); i++) {
             List<String> row = expectedGameBoard.get(i);
             for (int j = 0; j < row.size(); j++) {
@@ -86,12 +90,14 @@ public class TicTacToeApplicationStepDefinitions {
 
     @Then("^noughts turn$")
     public void noughtsTurn() {
+        ngWebDriver.waitForAngularRequestsToFinish();
         WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-turn"));
         assertThat(gameBoardTurnElement.getText(), is("Noughts"));
     }
 
     @Then("^crosses turn$")
     public void crossedTurn() {
+        ngWebDriver.waitForAngularRequestsToFinish();
         WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-turn"));
         assertThat(gameBoardTurnElement.getText(), is("Crosses"));
     }
