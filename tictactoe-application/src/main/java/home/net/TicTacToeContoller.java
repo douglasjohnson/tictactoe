@@ -13,7 +13,8 @@ public class TicTacToeContoller {
     private TicTacToeGame tictactoeGame;
 
     @RequestMapping(value = "/tictactoe", method = RequestMethod.GET)
-    public @ResponseBody TicTacToeGame newGame() {
+    @ResponseBody
+    public TicTacToeGame newGame() {
         return tictactoeGame;
     }
 
