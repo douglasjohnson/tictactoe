@@ -1,0 +1,13 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+.tictactoe-gameboard {
+    width: 305px;
+}
+.tictactoe-gameboard-cell {
+    border-style: solid;
+    border-width: 1px;
+    height: 100px;
+    width: 100px;
+    float: left;
+}
