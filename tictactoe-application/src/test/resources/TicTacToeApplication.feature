@@ -79,7 +79,6 @@ Feature: TicTacToe application
       | O | O | X |
       | O | X | O |
 
-@development
   Scenario: Can not set first move turn after first move has been played
     Given a new game of tic tac toe is started
       And a move is made in row "1" column "1"
