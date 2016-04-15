@@ -14,7 +14,8 @@
             </div>
         </div>
         <div id="tictactoe-turn"><span>{{tictactoe.state.turn}}</span></div>
-        <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" value="Switch first turn"/>
+        <div id="tictactoe-result"><span>{{tictactoe.state.result}}</span></div>
+        <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" data-ng-show="tictactoe.state.switchFirstTurnAllowed" value="Switch first turn"/>
     </div>
 </body>
 </html>

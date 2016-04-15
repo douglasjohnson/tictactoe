@@ -82,7 +82,8 @@ public class TicTacToeApplicationStepDefinitions {
             for (int j = 0; j < row.size(); j++) {
                 String cell = row.get(j);
                 WebElement gameBoardRowElement = webDriver.findElement(By.id("tictactoe-gameboard-row" + (i + 1)));
-                WebElement gameBoardCellElement = gameBoardRowElement.findElement(By.id("tictactoe-gameboard-column" + (j + 1)));
+                WebElement gameBoardCellElement = gameBoardRowElement
+                        .findElement(By.id("tictactoe-gameboard-column" + (j + 1)));
                 assertThat(gameBoardCellElement.getText(), is(cell));
             }
         }
@@ -102,7 +103,7 @@ public class TicTacToeApplicationStepDefinitions {
         assertThat(gameBoardTurnElement.getText(), is("Crosses"));
     }
 
-    @When("^a move in row \"([^\"]*)\" column \"([^\"]*)\" is not allowed$")
+    @Then("^a move in row \"([^\"]*)\" column \"([^\"]*)\" is not allowed$")
     public void moveNotAllowed(int row, int column) {
         WebElement gameBoardRowElement = webDriver.findElement(By.id("tictactoe-gameboard-row" + row));
         WebElement gameBoardCellElement = gameBoardRowElement.findElement(By.id("tictactoe-gameboard-column" + column));
@@ -110,5 +111,32 @@ public class TicTacToeApplicationStepDefinitions {
         gameBoardCellElement.click();
         ngWebDriver.waitForAngularRequestsToFinish();
         assertThat(gameBoardCellElement.getText(), is(expectedText));
+    }
+
+    @Then("^noughts wins$")
+    public void noughtsWins() {
+        ngWebDriver.waitForAngularRequestsToFinish();
+        WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-result"));
+        assertThat(gameBoardTurnElement.getText(), is("Winner: Noughts"));
+    }
+
+    @Then("^no more moves$")
+    public void noMoves() {
+        ngWebDriver.waitForAngularRequestsToFinish();
+        WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-turn"));
+        assertThat(gameBoardTurnElement.getText(), is(""));
+    }
+
+    @Then("^game is drawn$")
+    public void gameDrawn() {
+        ngWebDriver.waitForAngularRequestsToFinish();
+        WebElement gameBoardTurnElement = webDriver.findElement(By.id("tictactoe-result"));
+        assertThat(gameBoardTurnElement.getText(), is("Draw"));
+    }
+
+    @Then("^switch play first is not allowed$")
+    public void switchPlayFirstNotAllowed() {
+        WebElement gameBoardFirstTurnElement = webDriver.findElement(By.id("tictactoe-first-turn"));
+        assertThat(gameBoardFirstTurnElement.isDisplayed(), is(false));
     }
 }

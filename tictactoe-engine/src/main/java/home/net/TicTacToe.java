@@ -32,7 +32,7 @@ public class TicTacToe {
         return firstTurnUpdated;
     }
 
-    private boolean noMovesPlayed() {
+    public boolean noMovesPlayed() {
         boolean noMovePlayed = true;
         for (int row = 0; row < gameBoard.length; row++) {
             String[] gameBoardRow = gameBoard[row];

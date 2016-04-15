@@ -23,7 +23,20 @@ public class TicTacToeGame {
     }
 
     public String getTurn() {
-        return tictactoe.turn() == NOUGHTS_SYMBOL ? NOUGHTS : CROSSES;
+        return convertSymbolToText(tictactoe.turn());
+    }
+
+    public String getResult() {
+        String result = null;
+        if (getTurn() == null) {
+            String winner = tictactoe.winner();
+            result = winner != null ? "Winner: " + convertSymbolToText(winner) : "Draw";
+        }
+        return result;
+    }
+
+    public boolean getSwitchFirstTurnAllowed() {
+        return tictactoe.noMovesPlayed();
     }
 
     public void switchFirstTurn() {
@@ -32,6 +45,16 @@ public class TicTacToeGame {
 
     public void move(int row, int column) {
         tictactoe.move(row, column);
+    }
+
+    private String convertSymbolToText(String symbol) {
+        String text = null;
+        if (NOUGHTS_SYMBOL.equals(symbol)) {
+            text = NOUGHTS;
+        } else if (CROSSES_SYMBOL.equals(symbol)) {
+            text = CROSSES;
+        }
+        return text;
     }
 
 }
