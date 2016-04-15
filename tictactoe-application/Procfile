@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT -jar  target/tictactoe-application-0.0.1-SNAPSHOT.war
