@@ -130,3 +130,16 @@ Feature: TicTacToe
       And a move is made in row "1" column "1"
      Then noughts set to play first is not allowed
       And crosses turn
+
+  Scenario: Play move after game won is not allowed
+    Given a new game of tic tac toe is started
+      And a move is made in row "1" column "1"
+      And a move is made in row "2" column "1"
+      And a move is made in row "1" column "2"
+      And a move is made in row "2" column "2"
+      And a move is made in row "1" column "3"
+     Then a move in row "3" column "1" is not allowed
+      And the game board is:
+      | O | O | O |
+      | X | X |   |
+      |   |   |   |
