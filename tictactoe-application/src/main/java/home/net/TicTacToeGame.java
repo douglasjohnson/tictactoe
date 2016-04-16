@@ -15,7 +15,7 @@ public class TicTacToeGame {
     private TicTacToe tictactoe;
 
     public TicTacToeGame() {
-        tictactoe = new TicTacToe();
+        reset();
     }
 
     public String[][] getGameboard() {
@@ -55,6 +55,10 @@ public class TicTacToeGame {
             text = CROSSES;
         }
         return text;
+    }
+
+    public void reset() {
+        tictactoe = new TicTacToe();
     }
 
 }

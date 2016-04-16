@@ -30,6 +30,13 @@ public class TicTacToeContoller {
         return tictactoeGame;
     }
 
+    @RequestMapping(value = "/reset", method = RequestMethod.GET)
+    @ResponseBody
+    public TicTacToeGame reset() {
+        tictactoeGame.reset();
+        return tictactoeGame;
+    }
+
     @RequestMapping(value = "/move", method = RequestMethod.POST)
     @ResponseBody
     public TicTacToeGame move(@RequestBody Map<String, Integer> map) {

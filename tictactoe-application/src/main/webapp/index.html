@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="css/tictactoe.css">
 </head>
 <body data-ng-controller="tictactoeController">
-    <div data-ng-cloak data-ng-show="tictactoe.state">
+    <div id="tictactoe" data-ng-cloak data-ng-show="tictactoe.state">
         <div class="tictactoe-gameboard">
             <div id="tictactoe-gameboard-row{{rowIndex}}" data-ng-repeat="row in tictactoe.state.gameboard track by $index" data-ng-init="rowIndex = $index + 1" class="tictactoe-gameboard-row">
                 <div id="tictactoe-gameboard-column{{columnIndex}}" data-ng-repeat="column in row track by $index" data-ng-init="columnIndex = $index + 1" data-ng-click="tictactoe.makeMove(rowIndex, columnIndex)" class="tictactoe-gameboard-cell"><span>{{column}}</span></div>
@@ -16,6 +16,8 @@
         <div id="tictactoe-turn"><span>{{tictactoe.state.turn}}</span></div>
         <div id="tictactoe-result"><span>{{tictactoe.state.result}}</span></div>
         <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" data-ng-show="tictactoe.state.switchFirstTurnAllowed" value="Switch first turn"/>
+        <input id="tictactoe-play-again" data-ng-click="tictactoe.playAgain()" type="button" value="Play again"/>
+        <div id="tictactoe-dialog-confirm" class="tictactoe-dialog-confirm"><p>Are you sure you want to abandon this game?</p></div>
     </div>
 </body>
 </html>
