@@ -97,3 +97,60 @@ Feature: TicTacToe application
       | O | O | O |
       | X | X |   |
       |   |   |   |
+
+  Scenario: Play again button is displayed
+    When a new game of tic tac toe is started
+    Then the play again button is displayed
+
+  Scenario: Play again displays are you sure dialog when game is in progress
+    Given a new game of tic tac toe is started
+     When I click play again
+     Then dialog is displayed with text "Are you sure you want to abandon this game?"
+      And dialog has "Yes" button
+      And dialog has "No" button
+
+  Scenario: Play again are you sure dialog yes response restarts the game
+    Given a new game of tic tac toe is started
+      And a move is made in row "1" column "1"
+      And I click play again
+     When I click "Yes" on the are you sure dialog
+     Then the game board is empty
+      And noughts turn
+
+  Scenario: Play again are you sure dialog no response does not affect game
+    Given a new game of tic tac toe is started
+      And a move is made in row "2" column "2"
+      And I click play again
+     When I click "No" on the are you sure dialog
+     Then the game board is:
+      |  |   |  |
+      |  | O |  |
+      |  |   |  |
+      And the are you sure dialog is closed
+      And crosses turn
+
+  Scenario: Play again returns to the new game page with no dialog when games is won
+    Given a new game of tic tac toe is started
+      And a move is made in row "1" column "1"
+      And a move is made in row "2" column "1"
+      And a move is made in row "1" column "2"
+      And a move is made in row "2" column "2"
+      And a move is made in row "1" column "3"
+     When I click play again
+     Then the game board is empty
+      And noughts turn
+
+  Scenario: Play again restart the game with no dialog when games is drawn
+    Given a new game of tic tac toe is started
+      And a move is made in row "2" column "2"
+      And a move is made in row "1" column "1"
+      And a move is made in row "1" column "2"
+      And a move is made in row "3" column "2"
+      And a move is made in row "2" column "1"
+      And a move is made in row "2" column "3"
+      And a move is made in row "3" column "1"
+      And a move is made in row "1" column "3"
+      And a move is made in row "3" column "3"
+     When I click play again
+     Then the game board is empty
+      And noughts turn
