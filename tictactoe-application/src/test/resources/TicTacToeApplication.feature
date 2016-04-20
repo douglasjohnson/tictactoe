@@ -109,12 +109,14 @@ Feature: TicTacToe application
       And dialog has "Yes" button
       And dialog has "No" button
 
+@development
   Scenario: Play again are you sure dialog yes response restarts the game
     Given a new game of tic tac toe is started
       And a move is made in row "1" column "1"
       And I click play again
      When I click "Yes" on the are you sure dialog
      Then the game board is empty
+      And the are you sure dialog is closed
       And noughts turn
 
   Scenario: Play again are you sure dialog no response does not affect game

@@ -1,14 +1,28 @@
 [data-ng-cloak] {
     display: none;
 }
-.tictactoe-gameboard {
-    width: 300px;
+.tictactoe {
+    padding: 5vmin;
+}
+.tictactoe-gameboard-row {
+    display: flex;
+    justify-content: center;
 }
 .tictactoe-gameboard-cell {
     box-sizing: border-box;
     border-style: solid;
-    border-width: 2px;
-    height: 100px;
-    width: 100px;
-    float: left;
+    width: 33vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.tictactoe-gameboard-cell > span {
+    font-size: 5em;
+    font-size: 20vmin;
+    height: 23vmin;
+}
+.tictactoe-message {
+}
+.tictactoe-controls {
 }

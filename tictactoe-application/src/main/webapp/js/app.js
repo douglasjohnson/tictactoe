@@ -15,6 +15,7 @@ define([ 'angular', 'jquery', 'jquery-ui' ], function (angular, $) {
                     autoOpen : false,
                     buttons : {
                         Yes : function() {
+                            dialog.close();
                             tictactoe.reset();
                         },
                         No : function() {

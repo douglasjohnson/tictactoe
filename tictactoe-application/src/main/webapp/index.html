@@ -4,19 +4,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>TicTacToe</title>
 <script type="text/javascript" data-main="js/main" src="js/lib/require-2.2.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/vader/jquery-ui.min.css">
 <link rel="stylesheet" type="text/css" href="css/tictactoe.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body data-ng-controller="tictactoeController">
     <div id="tictactoe" data-ng-cloak data-ng-show="tictactoe.state">
         <div class="tictactoe-gameboard">
             <div id="tictactoe-gameboard-row{{rowIndex}}" data-ng-repeat="row in tictactoe.state.gameboard track by $index" data-ng-init="rowIndex = $index + 1" class="tictactoe-gameboard-row">
-                <div id="tictactoe-gameboard-column{{columnIndex}}" data-ng-repeat="column in row track by $index" data-ng-init="columnIndex = $index + 1" data-ng-click="tictactoe.makeMove(rowIndex, columnIndex)" class="tictactoe-gameboard-cell"><span>{{column}}</span></div>
+                <div id="tictactoe-gameboard-column{{columnIndex}}" data-ng-repeat="column in row track by $index" data-ng-init="columnIndex = $index + 1" data-ng-click="tictactoe.makeMove(rowIndex, columnIndex)" class="tictactoe-gameboard-cell"><span>{{column || ""}}</span></div>
             </div>
         </div>
-        <div id="tictactoe-turn"><span>{{tictactoe.state.turn}}</span></div>
-        <div id="tictactoe-result"><span>{{tictactoe.state.result}}</span></div>
-        <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" data-ng-show="tictactoe.state.switchFirstTurnAllowed" value="Switch first turn"/>
-        <input id="tictactoe-play-again" data-ng-click="tictactoe.playAgain()" type="button" value="Play again"/>
+        <div class="tictactoe-message">
+            <div id="tictactoe-turn"><span>{{tictactoe.state.turn}}</span></div>
+            <div id="tictactoe-result"><span>{{tictactoe.state.result}}</span></div>
+        </div>
+        <div class="tictactoe-controls">
+            <input id="tictactoe-first-turn" type="button" data-ng-click="tictactoe.switchFirstTurn()" data-ng-show="tictactoe.state.switchFirstTurnAllowed" value="Switch first turn"/>
+            <input id="tictactoe-play-again" data-ng-click="tictactoe.playAgain()" type="button" value="Play again"/>
+        </div>
         <div id="tictactoe-dialog-confirm" class="tictactoe-dialog-confirm"><p>Are you sure you want to abandon this game?</p></div>
     </div>
 </body>
