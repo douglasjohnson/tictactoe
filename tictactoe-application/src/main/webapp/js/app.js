@@ -45,5 +45,4 @@ define([ 'angular', 'jquery', 'jquery-ui' ], function (angular, $) {
                 $http.get('tictactoe').success(tictactoe.handleStateResponse);
             };
         });
-    
 });
