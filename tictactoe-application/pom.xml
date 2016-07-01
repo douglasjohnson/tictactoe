@@ -85,25 +85,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.19.1</version>
-                <configuration>
-                    <useManifestOnlyJar>false</useManifestOnlyJar>
-                    <systemPropertyVariables>
-                        <phantomjs.binary.path>${phantomjs.binary}</phantomjs.binary.path>
-                    </systemPropertyVariables>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
@@ -141,6 +122,43 @@
                 </executions>
                 <configuration>
                     <version>2.1.1</version>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <executable>java</executable>
+                    <classpathScope>test</classpathScope>
+                    <arguments>
+                        <argument>-Dphantomjs.binary.path=${phantomjs.binary}</argument>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>cucumber.api.cli.Main</argument>
+                        <argument>--plugin</argument>
+                        <argument>junit:${project.build.directory}/cucumber-reports/cucumber.xml</argument>
+                        <argument>--plugin</argument>
+                        <argument>pretty</argument>
+                        <argument>--strict</argument>
+                        <argument>--monochrome</argument>
+                        <argument>--glue</argument>
+                        <argument>home/net</argument>
+                        <argument>${project.basedir}/src/test/resources</argument>
+                    </arguments>
+                    <systemProperties>
+                        <systemProperty>
+                            <key>phantomjs.binary.path</key>
+                            <value>${phantomjs.binary}</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
         </plugins>
