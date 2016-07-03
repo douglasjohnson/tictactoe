@@ -139,7 +139,7 @@
                     <executable>java</executable>
                     <classpathScope>test</classpathScope>
                     <arguments>
-                        <argument>${jacoco.agent}</argument>
+                        <argument>${jacoco.agent-integration}</argument>
                         <argument>-Dphantomjs.binary.path=${phantomjs.binary}</argument>
                         <argument>-classpath</argument>
                         <classpath/>

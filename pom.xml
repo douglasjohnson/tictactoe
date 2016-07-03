@@ -73,17 +73,17 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <propertyName>
-                                jacoco.agent
-                            </propertyName>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>pre-integration-test</id>
                         <goals>
                             <goal>prepare-agent-integration</goal>
                         </goals>
+                        <configuration>
+                            <propertyName>
+                                jacoco.agent-integration
+                            </propertyName>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>post-integration-test</id>
