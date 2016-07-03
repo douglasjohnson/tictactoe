@@ -38,6 +38,7 @@
                     <executable>java</executable>
                     <classpathScope>test</classpathScope>
                     <arguments>
+                        <argument>${jacoco.agent}</argument>
                         <argument>-classpath</argument>
                         <classpath/>
                         <argument>cucumber.api.cli.Main</argument>
