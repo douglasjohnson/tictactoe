@@ -109,7 +109,6 @@ Feature: TicTacToe application
       And dialog has "Yes" button
       And dialog has "No" button
 
-@development
   Scenario: Play again are you sure dialog yes response restarts the game
     Given a new game of tic tac toe is started
       And a move is made in row "1" column "1"
