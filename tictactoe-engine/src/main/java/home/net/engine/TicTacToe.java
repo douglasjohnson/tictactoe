@@ -1,4 +1,4 @@
-package home.net;
+package home.net.engine;
 
 public class TicTacToe {
 

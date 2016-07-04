@@ -1,4 +1,4 @@
-package home.net;
+package home.net.engine;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -8,6 +8,7 @@ import java.util.List;
 
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import home.net.engine.TicTacToe;
 
 public class TicTacToeStepDefinitions {
 

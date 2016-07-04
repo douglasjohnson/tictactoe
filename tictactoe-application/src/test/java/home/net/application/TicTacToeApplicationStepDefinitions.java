@@ -1,4 +1,4 @@
-package home.net;
+package home.net.application;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.not;
@@ -26,6 +26,7 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import home.net.application.TicTacToeApplication;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TicTacToeApplication.class, loader = SpringApplicationContextLoader.class)

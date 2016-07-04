@@ -1,7 +1,9 @@
-package home.net;
+package home.net.application;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import home.net.engine.TicTacToe;
 
 @Component
 @Scope("session")
