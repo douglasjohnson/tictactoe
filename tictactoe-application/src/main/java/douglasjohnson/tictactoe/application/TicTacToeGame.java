@@ -3,7 +3,7 @@ package douglasjohnson.tictactoe.application;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import home.net.engine.TicTacToe;
+import douglasjohnson.tictactoe.engine.TicTacToe;
 
 @Component
 @Scope("session")
