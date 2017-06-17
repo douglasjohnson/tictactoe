@@ -9,10 +9,6 @@
     </parent>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
         </dependency>
@@ -40,7 +36,7 @@
                     <arguments>
                         <argument>${jacoco.agent}</argument>
                         <argument>-classpath</argument>
-                        <classpath/>
+                        <classpath />
                         <argument>cucumber.api.cli.Main</argument>
                         <argument>--plugin</argument>
                         <argument>junit:${cucumber.report.directory}/cucumber.xml</argument>
