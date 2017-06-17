@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>tictactoe-engine</artifactId>
     <parent>
-        <groupId>tictactoe</groupId>
+        <groupId>douglasjohnson.tictactoe</groupId>
         <artifactId>tictactoe</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -51,7 +51,7 @@
                         <argument>--strict</argument>
                         <argument>--monochrome</argument>
                         <argument>--glue</argument>
-                        <argument>home/net</argument>
+                        <argument>douglasjohnson/tictactoe</argument>
                         <argument>${project.basedir}/src/test/resources</argument>
                     </arguments>
                 </configuration>
