@@ -42,7 +42,7 @@ public class TicTacToeGame {
     }
 
     public void switchFirstTurn() {
-        tictactoe.firstTurn(tictactoe.turn() == NOUGHTS_SYMBOL ? CROSSES_SYMBOL : NOUGHTS_SYMBOL);
+        tictactoe.firstTurn(NOUGHTS_SYMBOL.equals(tictactoe.turn()) ? CROSSES_SYMBOL : NOUGHTS_SYMBOL);
     }
 
     public void move(int row, int column) {
