@@ -9,6 +9,8 @@
     </parent>
     <properties>
         <spring-boot.version>1.3.3.RELEASE</spring-boot.version>
+        <host>localhost</host>
+        <port>8080</port>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -70,6 +72,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>tictactoe-application</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -112,46 +115,122 @@
                     <version>2.1.1</version>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <executable>java</executable>
-                    <classpathScope>test</classpathScope>
-                    <arguments>
-                        <argument>${jacoco.agent-integration}</argument>
-                        <argument>-Dphantomjs.binary.path=${phantomjs.binary}</argument>
-                        <argument>-classpath</argument>
-                        <classpath/>
-                        <argument>cucumber.api.cli.Main</argument>
-                        <argument>--plugin</argument>
-                        <argument>junit:${cucumber.report.directory}/cucumber.xml</argument>
-                        <argument>--plugin</argument>
-                        <argument>html:${cucumber.report.directory}/html</argument>
-                        <argument>--plugin</argument>
-                        <argument>pretty</argument>
-                        <argument>--strict</argument>
-                        <argument>--monochrome</argument>
-                        <argument>--glue</argument>
-                        <argument>douglasjohnson/tictactoe</argument>
-                        <argument>${project.basedir}/src/test/resources</argument>
-                    </arguments>
-                    <systemProperties>
-                        <systemProperty>
-                            <key>phantomjs.binary.path</key>
-                            <value>${phantomjs.binary}</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${jacoco.agent}</argLine>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>test</classpathScope>
+                            <arguments>
+                                <argument>${jacoco.agent-integration}</argument>
+                                <argument>-Dphantomjs.binary.path=${phantomjs.binary}</argument>
+                                <argument>-Dhost=${host}</argument>
+                                <argument>-Dport=${port}</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>cucumber.api.cli.Main</argument>
+                                <argument>--plugin</argument>
+                                <argument>junit:${cucumber.report.directory}/cucumber.xml</argument>
+                                <argument>--plugin</argument>
+                                <argument>html:${cucumber.report.directory}/html</argument>
+                                <argument>--plugin</argument>
+                                <argument>pretty</argument>
+                                <argument>--strict</argument>
+                                <argument>--monochrome</argument>
+                                <argument>--glue</argument>
+                                <argument>douglasjohnson/tictactoe</argument>
+                                <argument>${project.basedir}/src/test/resources</argument>
+                            </arguments>
+                            <systemProperties>
+                                <systemProperty>
+                                    <key>phantomjs.binary.path</key>
+                                    <value>${phantomjs.binary}</value>
+                                </systemProperty>
+                            </systemProperties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <executable>java</executable>
+                            <classpathScope>test</classpathScope>
+                            <arguments>
+                                <argument>-Dphantomjs.binary.path=${phantomjs.binary}</argument>
+                                <argument>-Dhost=${host}</argument>
+                                <argument>-Dport=${port}</argument>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>cucumber.api.cli.Main</argument>
+                                <argument>--plugin</argument>
+                                <argument>junit:${cucumber.report.directory}/cucumber.xml</argument>
+                                <argument>--plugin</argument>
+                                <argument>html:${cucumber.report.directory}/html</argument>
+                                <argument>--plugin</argument>
+                                <argument>pretty</argument>
+                                <argument>--strict</argument>
+                                <argument>--monochrome</argument>
+                                <argument>--glue</argument>
+                                <argument>douglasjohnson/tictactoe</argument>
+                                <argument>${project.basedir}/src/test/resources</argument>
+                            </arguments>
+                            <systemProperties>
+                                <systemProperty>
+                                    <key>phantomjs.binary.path</key>
+                                    <value>${phantomjs.binary}</value>
+                                </systemProperty>
+                            </systemProperties>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

@@ -1,31 +1,28 @@
 package douglasjohnson.tictactoe.application;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.text.IsEmptyString.isEmptyString;
-import static org.junit.Assert.assertThat;
-
-import java.util.List;
-
+import com.paulhammant.ngwebdriver.NgWebDriver;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.paulhammant.ngwebdriver.NgWebDriver;
+import java.util.List;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.text.IsEmptyString.isEmptyString;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TicTacToeApplication.class, loader = SpringApplicationContextLoader.class)
@@ -42,8 +39,8 @@ public class TicTacToeApplicationStepDefinitions {
     private PhantomJSDriver webDriver;
     private NgWebDriver ngWebDriver;
 
-    @Value("${local.server.port}")
-    private int port;
+    private static final String HOST = System.getProperty("host", "localhost");
+    private static final String PORT = System.getProperty("port", "8080");
 
     @Before
     public void setUp() {
@@ -58,7 +55,7 @@ public class TicTacToeApplicationStepDefinitions {
 
     @When("^a new game of tic tac toe is started$")
     public void startNewGame() {
-        webDriver.get("http://localhost:" + port + "/TicTacToe");
+        webDriver.get("http://" + HOST + ":" + PORT + "/TicTacToe");
         waitForAngular();
     }
 
