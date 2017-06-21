@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>tictactoe-application</artifactId>
     <packaging>war</packaging>
@@ -34,22 +35,21 @@
             <artifactId>hamcrest-all</artifactId>
         </dependency>
         <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-spring</artifactId>
-            <version>${cucumber.version}</version>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-spring</artifactId>
+            <version>1.4.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.53.0</version>
+            <version>3.4.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.detro</groupId>
+            <groupId>com.codeborne</groupId>
             <artifactId>phantomjsdriver</artifactId>
-            <version>1.2.0</version>
-            <scope>test</scope>
+            <version>1.4.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,6 +68,12 @@
             <groupId>com.paulhammant</groupId>
             <artifactId>ngwebdriver</artifactId>
             <version>0.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>1.1.36</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -153,7 +159,9 @@
                                 <argument>-Dport=${port}</argument>
                                 <argument>-classpath</argument>
                                 <classpath/>
-                                <argument>cucumber.api.cli.Main</argument>
+                                <argument>
+                                    net.serenitybdd.cucumber.integration.intellij.CucumberWithSerenityRuntimeMain
+                                </argument>
                                 <argument>--plugin</argument>
                                 <argument>junit:${cucumber.report.directory}/cucumber.xml</argument>
                                 <argument>--plugin</argument>
@@ -164,7 +172,7 @@
                                 <argument>--monochrome</argument>
                                 <argument>--glue</argument>
                                 <argument>douglasjohnson/tictactoe</argument>
-                                <argument>${project.basedir}/src/test/resources</argument>
+                                <argument>${project.basedir}/src/test/resources/TicTacToeApplication.feature:3</argument>
                             </arguments>
                             <systemProperties>
                                 <systemProperty>
@@ -173,6 +181,20 @@
                                 </systemProperty>
                             </systemProperties>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.serenity-bdd.maven.plugins</groupId>
+                        <artifactId>serenity-maven-plugin</artifactId>
+                        <version>1.4.0</version>
+                        <executions>
+                            <execution>
+                                <id>serenity-reports</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>aggregate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
