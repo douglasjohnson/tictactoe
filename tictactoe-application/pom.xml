@@ -172,7 +172,7 @@
                                 <argument>--monochrome</argument>
                                 <argument>--glue</argument>
                                 <argument>douglasjohnson/tictactoe</argument>
-                                <argument>${project.basedir}/src/test/resources/TicTacToeApplication.feature:3</argument>
+                                <argument>${project.basedir}/src/test/resources</argument>
                             </arguments>
                             <systemProperties>
                                 <systemProperty>
