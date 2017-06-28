@@ -1,6 +1,6 @@
-FROM tomcat:alpine
+FROM openjdk:8-jre-alpine
 MAINTAINER douglasjohnson
 
-ADD tictactoe-application.war /usr/local/tomcat/webapps/
+ADD tictactoe.war /usr/local/
 
-CMD ["catalina.sh", "run"]
+CMD ["java", "-jar", "/usr/local/tictactoe.war"]
